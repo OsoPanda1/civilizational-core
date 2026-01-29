@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -30,6 +34,14 @@ export default {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -57,6 +69,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // TAMV custom colors
+        tamv: {
+          gold: "hsl(var(--tamv-gold))",
+          "gold-dim": "hsl(var(--tamv-gold-dim))",
+          navy: "hsl(var(--tamv-navy))",
+          "navy-light": "hsl(var(--tamv-navy-light))",
+          teal: "hsl(var(--tamv-teal))",
+          "teal-dim": "hsl(var(--tamv-teal-dim))",
+          crimson: "hsl(var(--tamv-crimson))",
+          slate: "hsl(var(--tamv-slate))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -65,25 +88,32 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "pulse-gold": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.7" },
+        },
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(10px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "pulse-gold": "pulse-gold 2s ease-in-out infinite",
+        "fade-in": "fade-in 0.3s ease-out",
+      },
+      boxShadow: {
+        gold: "0 0 30px hsl(43 96% 56% / 0.2)",
+        card: "0 4px 24px hsl(0 0% 0% / 0.4)",
+        elevated: "0 8px 32px hsl(0 0% 0% / 0.5)",
       },
     },
   },

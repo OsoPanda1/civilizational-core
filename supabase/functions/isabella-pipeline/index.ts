@@ -16,8 +16,8 @@
  
  interface IsabellaRequest {
    intent: string;
-   context?: Record<string, unknown>;
-   payload?: string;
+  context?: Record<string, unknown>;
+  payload?: string | Record<string, unknown>;
  }
  
  interface StageResult {
@@ -198,9 +198,10 @@
      }
  
      const body: IsabellaRequest = await req.json();
-     const { intent, context = {}, payload = "" } = body;
- 
-     if (!intent) {
+      const { intent, context = {}, payload: rawPayload = "" } = body;
+      const payload = typeof rawPayload === "string" ? rawPayload : JSON.stringify(rawPayload);
+
+      if (!intent) {
        return new Response(
          JSON.stringify({ error: "intent is required" }),
          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }

@@ -1,6 +1,6 @@
  import React, { useRef, useMemo } from 'react';
  import { useFrame } from '@react-three/fiber';
- import { Text, Sphere, Line } from '@react-three/drei';
+ import { Sphere, Line, Html } from '@react-three/drei';
  import * as THREE from 'three';
  
  interface NodeData {
@@ -89,27 +89,13 @@
          />
        </Sphere>
        
-       {/* Node label */}
-       <Text
-         position={[0, size + 0.3, 0]}
-         fontSize={0.15}
-         color="white"
-         anchorX="center"
-         anchorY="middle"
-       >
-         {node.name}
-       </Text>
-       
-       {/* Status indicator */}
-       <Text
-         position={[0, size + 0.5, 0]}
-         fontSize={0.1}
-         color={color}
-         anchorX="center"
-         anchorY="middle"
-       >
-         {node.astState} | {node.healthScore}%
-       </Text>
+        {/* Node label */}
+        <Html position={[0, size + 0.4, 0]} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
+          <div style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
+            <div style={{ color: 'white', fontSize: '10px', fontWeight: 600 }}>{node.name}</div>
+            <div style={{ color, fontSize: '8px' }}>{node.astState} | {node.healthScore}%</div>
+          </div>
+        </Html>
      </group>
    );
  };

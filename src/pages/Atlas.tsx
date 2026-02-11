@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { useFederatedNodes } from "@/hooks/useFederatedNodes";
 import { usePhoenixStatus } from "@/hooks/usePhoenixStatus";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -21,7 +21,7 @@ export default function Atlas() {
   const [recentThreats, setRecentThreats] = useState<number>(0);
 
   // Fetch sentinel status on mount
-  useState(() => {
+  useEffect(() => {
     const fetchSentinel = async () => {
       try {
         const res = await supabase.functions.invoke("sentinel-guard", {
@@ -36,7 +36,7 @@ export default function Atlas() {
       }
     };
     fetchSentinel();
-  });
+  }, []);
 
   const getStatusColor = (status: string | null) => {
     switch (status) {

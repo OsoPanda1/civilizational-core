@@ -50,8 +50,17 @@ export function Header() {
             <Link to="/feed" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Feed
             </Link>
+            <Link to="/atlas" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Atlas
+            </Link>
+            <Link to="/guardian" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Guardian
+            </Link>
             <Link to="/devhub" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               DevHub
+            </Link>
+            <Link to="/docs" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Docs
             </Link>
           </nav>
 
@@ -133,27 +142,23 @@ export function Header() {
         {mobileMenuOpen && (
           <nav className="md:hidden py-4 border-t border-border animate-fade-in">
             <div className="flex flex-col gap-2">
-              <Link
-                to="/"
-                className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Inicio
-              </Link>
-              <Link
-                to="/feed"
-                className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Feed
-              </Link>
-              <Link
-                to="/devhub"
-                className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                DevHub
-              </Link>
+              {[
+                { to: "/", label: "Inicio" },
+                { to: "/feed", label: "Feed" },
+                { to: "/atlas", label: "Atlas" },
+                { to: "/guardian", label: "Guardian" },
+                { to: "/devhub", label: "DevHub" },
+                { to: "/docs", label: "Docs" },
+              ].map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </nav>
         )}

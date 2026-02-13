@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { callGateway } from "@/lib/tamv-gateway-client";
 
 export interface PhoenixStatus {
   fundBalance: number;
@@ -18,25 +18,21 @@ export function usePhoenixStatus() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetch = async () => {
-      const [balRes, healthRes, txRes] = await Promise.all([
-        supabase.rpc("get_phoenix_fund_balance"),
-        supabase.rpc("get_economic_health"),
-        supabase
-          .from("phoenix_transactions")
-          .select("total_amount")
-          .eq("tx_status", "completed"),
-      ]);
-
-      setStatus({
-        fundBalance: (balRes.data as number) || 0,
-        economicHealth: (healthRes.data as number) || 0,
-        totalVolume: txRes.data?.reduce((s, t) => s + Number(t.total_amount), 0) || 0,
-        transactionCount: txRes.data?.length || 0,
-      });
+    const fetchStatus = async () => {
+      try {
+        const result = await callGateway<PhoenixStatus>("economy.phoenix.status");
+        setStatus({
+          fundBalance: result.fundBalance || 0,
+          economicHealth: result.economicHealth || 0,
+          totalVolume: result.totalVolume || 0,
+          transactionCount: result.transactionCount || 0,
+        });
+      } catch (e) {
+        console.error("Failed to fetch phoenix status via gateway:", e);
+      }
       setLoading(false);
     };
-    fetch();
+    fetchStatus();
   }, []);
 
   return { status, loading };

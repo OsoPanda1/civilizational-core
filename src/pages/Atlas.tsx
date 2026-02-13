@@ -3,16 +3,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 import { 
   Globe, Server, Activity, Shield, Clock, Cpu, Database, Zap,
-  CheckCircle, AlertTriangle, RefreshCw, TrendingUp, Wallet, BarChart3
+  CheckCircle, AlertTriangle, TrendingUp, Wallet, BarChart3
 } from "lucide-react";
 import { useFederatedNodes } from "@/hooks/useFederatedNodes";
 import { usePhoenixStatus } from "@/hooks/usePhoenixStatus";
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { callGateway } from "@/lib/tamv-gateway-client";
 
 export default function Atlas() {
   const { nodes, loading: nodesLoading } = useFederatedNodes();
@@ -20,17 +18,16 @@ export default function Atlas() {
   const [sentinelStatus, setSentinelStatus] = useState<string>("loading");
   const [recentThreats, setRecentThreats] = useState<number>(0);
 
-  // Fetch sentinel status on mount
+  // Fetch sentinel status via unified gateway
   useEffect(() => {
     const fetchSentinel = async () => {
       try {
-        const res = await supabase.functions.invoke("sentinel-guard", {
-          body: { action: "status" },
-        });
-        if (res.data) {
-          setSentinelStatus(res.data.status || "OPERATIONAL");
-          setRecentThreats(res.data.recent_threats?.length || 0);
-        }
+        const result = await callGateway<{
+          status: string;
+          recent_threats: any[];
+        }>("security.sentinel.status");
+        setSentinelStatus(result.status || "OPERATIONAL");
+        setRecentThreats(result.recent_threats?.length || 0);
       } catch {
         setSentinelStatus("ERROR");
       }
@@ -83,13 +80,13 @@ export default function Atlas() {
             </div>
             <div>
               <h1 className="text-2xl font-bold">Atlas de Federación</h1>
-              <p className="text-muted-foreground">Monitoreo del Sistema Tenochtitlán en tiempo real</p>
+              <p className="text-muted-foreground">Monitoreo via Gateway TAMV DM-X7</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="gap-1">
               <Activity className="w-3 h-3" />
-              En vivo
+              Gateway v7
             </Badge>
             <Badge className={sentinelStatus === "OPERATIONAL"
               ? "bg-success/20 text-success border-success/30"
@@ -208,7 +205,6 @@ export default function Atlas() {
                               <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] text-muted-foreground whitespace-nowrap">
                                 {node.node_name}
                               </span>
-                              {/* Tooltip */}
                               <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block z-10">
                                 <div className="bg-popover border border-border rounded-md p-2 text-xs shadow-lg whitespace-nowrap">
                                   <p className="font-medium">{node.node_name}</p>

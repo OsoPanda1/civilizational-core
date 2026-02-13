@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { callGateway } from "@/lib/tamv-gateway-client";
 
 export interface FederatedNodeData {
   id: string;
@@ -19,15 +19,16 @@ export function useFederatedNodes() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetch = async () => {
-      const { data } = await supabase
-        .from("federated_nodes")
-        .select("*")
-        .order("health_score", { ascending: false });
-      if (data) setNodes(data as FederatedNodeData[]);
+    const fetchNodes = async () => {
+      try {
+        const result = await callGateway<{ nodes: FederatedNodeData[] }>("ops.nodes.list");
+        setNodes(result.nodes || []);
+      } catch (e) {
+        console.error("Failed to fetch nodes via gateway:", e);
+      }
       setLoading(false);
     };
-    fetch();
+    fetchNodes();
   }, []);
 
   return { nodes, loading };

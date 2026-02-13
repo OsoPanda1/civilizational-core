@@ -7,12 +7,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
-  Shield, Clock, CheckCircle, XCircle, AlertTriangle,
+  Shield, Clock, CheckCircle, XCircle,
   User, FileText, Eye, ThumbsUp, ThumbsDown, History,
   Brain, RefreshCw, Activity, Zap
 } from "lucide-react";
 import { useGuardianActions } from "@/hooks/useGuardianActions";
-import { supabase } from "@/integrations/supabase/client";
+import { callGateway } from "@/lib/tamv-gateway-client";
 import { toast } from "sonner";
 
 export default function Guardian() {
@@ -42,40 +42,31 @@ export default function Guardian() {
   const handleTestPipeline = async () => {
     setTestingPipeline(true);
     try {
-      const res = await supabase.functions.invoke("isabella-pipeline", {
-        body: {
-          intent: "content_moderation",
-          payload: "Test content for moderation review",
-          context: { source: "guardian_console" },
-        },
+      const result = await callGateway<{
+        decision: string;
+        confidence: number;
+        explanation: string;
+      }>("kernel.isabella.test", {
+        intent: "content_moderation",
+        payload: "Test content for moderation review",
       });
-
-      if (res.data) {
-        toast.success(`Pipeline: ${res.data.decision} (confianza: ${(res.data.confidence * 100).toFixed(0)}%)`);
-      } else {
-        toast.error("Error en el pipeline");
-      }
+      toast.success(`Pipeline: ${result.decision} (confianza: ${(result.confidence * 100).toFixed(0)}%)`);
     } catch {
-      toast.error("Error de conexión con Isabella");
+      toast.error("Error de conexión con Isabella via Gateway");
     }
     setTestingPipeline(false);
   };
 
   const handleTestSentinel = async () => {
     try {
-      const res = await supabase.functions.invoke("sentinel-guard", {
-        body: {
-          action: "check",
-          target_type: "test",
-          payload: { content: "safe test content" },
-        },
-      });
-
-      if (res.data) {
-        toast.success(`Sentinel: ${res.data.threat_level} - ${res.data.recommendation}`);
-      }
+      const result = await callGateway<{
+        status: string;
+        threat_level: string;
+        mode: string;
+      }>("security.sentinel.status");
+      toast.success(`Sentinel: ${result.threat_level} - ${result.status} (modo: ${result.mode})`);
     } catch {
-      toast.error("Error de conexión con Sentinel");
+      toast.error("Error de conexión con Sentinel via Gateway");
     }
   };
 
@@ -100,7 +91,7 @@ export default function Guardian() {
             </div>
             <div>
               <h1 className="text-2xl font-bold">Guardian Console</h1>
-              <p className="text-muted-foreground">Panel HITL (Human-In-The-Loop) con Isabella AI</p>
+              <p className="text-muted-foreground">HITL via Gateway TAMV DM-X7</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -173,8 +164,8 @@ export default function Guardian() {
               <div className="flex items-center gap-3">
                 <Brain className="w-5 h-5 text-primary" />
                 <div>
-                  <p className="font-medium text-sm">Diagnóstico de Subsistemas</p>
-                  <p className="text-xs text-muted-foreground">Probar Isabella Pipeline y Sentinel Guard</p>
+                  <p className="font-medium text-sm">Diagnóstico via Gateway Unificado</p>
+                  <p className="text-xs text-muted-foreground">kernel.isabella.test · security.sentinel.status</p>
                 </div>
               </div>
               <div className="flex gap-2">

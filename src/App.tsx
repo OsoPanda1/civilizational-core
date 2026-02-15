@@ -14,6 +14,8 @@ import DevHub from "./pages/DevHub";
 import Guardian from "./pages/Guardian";
 import Atlas from "./pages/Atlas";
 import Documentation from "./pages/Documentation";
+import Messages from "./pages/Messages";
+import Notifications from "./pages/Notifications";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +33,8 @@ const App = () => (
             <Route path="/guardian" element={<Guardian />} />
             <Route path="/atlas" element={<Atlas />} />
             <Route path="/docs" element={<Documentation />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/notifications" element={<Notifications />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/auth/recover" element={<Recover />} />

@@ -1,0 +1,128 @@
+
+openapi: 3.1.0
+info:
+  title: TAMVAI Unified XR/VR/4D Economy API
+  version: 1.0.0
+  description: >
+    End-to-End Sovereign TAMVAI API integrating XR, VR, 3D/4D simulation,
+    P2P Economy, Identity, and Security. No external AI providers.
+
+servers:
+  - url: https://api.tamv.ai/v1
+
+security:
+  - DIDJWT: []
+
+components:
+  securitySchemes:
+    DIDJWT:
+      type: http
+      scheme: bearer
+      bearerFormat: DID-JWT
+
+  schemas:
+    Identity:
+      type: object
+      properties:
+        did:
+          type: string
+        jurisdiction:
+          type: string
+        role:
+          type: string
+
+    XRContext:
+      type: object
+      properties:
+        device:
+          enum: [AR, VR, XR, 3D, 4D]
+        world_id:
+          type: string
+        spatial_state:
+          type: object
+
+    EconomyTransaction:
+      type: object
+      properties:
+        asset_id:
+          type: string
+        amount:
+          type: number
+        ledger:
+          enum: [onchain, offchain, hybrid]
+
+    DecisionResponse:
+      type: object
+      properties:
+        decision:
+          enum: [allow, warn, block, escalate]
+        confidence:
+          type: number
+        audit_hash:
+          type: string
+
+paths:
+
+  /xr/session/start:
+    post:
+      summary: Start XR/VR/4D session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/XRContext'
+      responses:
+        '200':
+          description: Session started
+
+  /tamvai/analyze/xr:
+    post:
+      summary: Analyze XR interaction via TAMVAI
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                identity:
+                  $ref: '#/components/schemas/Identity'
+                xr_context:
+                  $ref: '#/components/schemas/XRContext'
+                input:
+                  type: string
+      responses:
+        '200':
+          description: TAMVAI decision
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecisionResponse'
+
+  /economy/tx/commit:
+    post:
+      summary: Commit P2P economy transaction with AI validation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EconomyTransaction'
+      responses:
+        '200':
+          description: Transaction committed
+
+  /p2p/sync:
+    post:
+      summary: Secure P2P state synchronization
+      responses:
+        '200':
+          description: Sync complete
+
+  /security/freeze:
+    post:
+      summary: Global sovereign freeze / kill-switch
+      responses:
+        '200':
+          description: System frozen and audited

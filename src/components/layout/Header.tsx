@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Shield, LogOut, User, Settings, Menu, X } from "lucide-react";
+import { Shield, LogOut, User, Settings, Menu, X, MessageCircle, Bell } from "lucide-react";
 import { useState } from "react";
 
 export function Header() {
@@ -61,6 +61,12 @@ export function Header() {
             </Link>
             <Link to="/docs" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Docs
+            </Link>
+            <Link to="/messages" className="text-muted-foreground hover:text-foreground transition-colors">
+              <MessageCircle className="w-4 h-4" />
+            </Link>
+            <Link to="/notifications" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Bell className="w-4 h-4" />
             </Link>
           </nav>
 
@@ -149,6 +155,8 @@ export function Header() {
                 { to: "/guardian", label: "Guardian" },
                 { to: "/devhub", label: "DevHub" },
                 { to: "/docs", label: "Docs" },
+                { to: "/messages", label: "Mensajes" },
+                { to: "/notifications", label: "Notificaciones" },
               ].map((link) => (
                 <Link
                   key={link.to}

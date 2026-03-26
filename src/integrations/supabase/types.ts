@@ -43,6 +43,54 @@ export type Database = {
           },
         ]
       }
+      businesses: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          hours: string | null
+          id: string
+          image_url: string | null
+          lat: number
+          lng: number
+          name: string
+          owner_id: string | null
+          phone: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          hours?: string | null
+          id?: string
+          image_url?: string | null
+          lat: number
+          lng: number
+          name: string
+          owner_id?: string | null
+          phone?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          hours?: string | null
+          id?: string
+          image_url?: string | null
+          lat?: number
+          lng?: number
+          name?: string
+          owner_id?: string | null
+          phone?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       citizen_identity: {
         Row: {
           consciousness_level: number | null
@@ -125,6 +173,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      events: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          end_date: string | null
+          event_date: string | null
+          id: string
+          image_url: string | null
+          is_featured: boolean | null
+          location: string | null
+          title: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          event_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean | null
+          location?: string | null
+          title: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          event_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean | null
+          location?: string | null
+          title?: string
+        }
+        Relationships: []
       }
       federated_nodes: {
         Row: {
@@ -501,6 +588,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      places: {
+        Row: {
+          address: string | null
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          lat: number
+          lng: number
+          name: string
+          rating: number | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          lat: number
+          lng: number
+          name: string
+          rating?: number | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          lat?: number
+          lng?: number
+          name?: string
+          rating?: number | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       post_hashtags: {
         Row: {

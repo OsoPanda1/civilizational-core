@@ -12,7 +12,8 @@ import {
   Shield, 
   Map,
   ExternalLink,
-  ChevronRight
+  ChevronRight,
+  Target
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -80,6 +81,14 @@ const volumes = [
     icon: Map,
     file: "VOLUMEN_VIII_ROADMAP.md",
     topics: ["8 Fases", "KPIs", "Hitos", "Principios"]
+  },
+  {
+    id: "vol-9",
+    title: "Volumen IX — Preproducción",
+    description: "Hardening, operación y checklist de salida a producción",
+    icon: Target,
+    file: "VOLUMEN_IX_PREPRODUCCION.md",
+    topics: ["RLS", "Runbooks", "Observabilidad", "QA"]
   }
 ];
 

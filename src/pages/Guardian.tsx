@@ -14,6 +14,7 @@ import {
 import { useGuardianActions } from "@/hooks/useGuardianActions";
 import { callGateway } from "@/lib/tamv-gateway-client";
 import { toast } from "sonner";
+import { OperationalReadinessBoard } from "@/components/operations/OperationalReadinessBoard";
 
 export default function Guardian() {
   const { user, loading: authLoading } = useAuth();
@@ -181,6 +182,10 @@ export default function Guardian() {
             </div>
           </CardContent>
         </Card>
+
+        <div className="mb-8">
+          <OperationalReadinessBoard />
+        </div>
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>

@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Globe, Server, Activity, Shield, Clock, Cpu, Database, Zap,
-  CheckCircle, AlertTriangle, TrendingUp, Wallet, BarChart3
+  CheckCircle, TrendingUp, Wallet, BarChart3
 } from "lucide-react";
 import { useFederatedNodes } from "@/hooks/useFederatedNodes";
 import { usePhoenixStatus } from "@/hooks/usePhoenixStatus";
@@ -15,7 +15,7 @@ import { OperationalReadinessBoard } from "@/components/operations/OperationalRe
 
 export default function Atlas() {
   const { nodes, loading: nodesLoading } = useFederatedNodes();
-  const { status: phoenix, loading: phoenixLoading } = usePhoenixStatus();
+  const { status: phoenix } = usePhoenixStatus();
   const [sentinelStatus, setSentinelStatus] = useState<string>("loading");
   const [recentThreats, setRecentThreats] = useState<number>(0);
 

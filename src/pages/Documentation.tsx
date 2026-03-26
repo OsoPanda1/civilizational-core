@@ -11,7 +11,6 @@ import {
   DollarSign, 
   Shield, 
   Map,
-  ExternalLink,
   ChevronRight,
   Target
 } from "lucide-react";

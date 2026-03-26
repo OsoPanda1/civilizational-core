@@ -40,6 +40,7 @@ npm run dev
 npm run build
 npm run preview
 npm run lint
+npm test
 ```
 
 > Nota: si `npm run lint` falla por dependencias de ESLint, instala primero las dependencias del proyecto.

@@ -80,7 +80,7 @@ export default function DevHub() {
             </div>
             <div>
               <h1 className="text-3xl font-bold">TAMV DM-X7 API</h1>
-              <p className="text-muted-foreground">Gateway Unificado — {totalEndpoints} Endpoints · 13 Dominios</p>
+              <p className="text-muted-foreground">Gateway Unificado — {totalEndpoints} Endpoints · {domains.length} Dominios</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2 mt-4">
@@ -176,8 +176,10 @@ export default function DevHub() {
 
                   <div className="flex flex-wrap gap-1">
                     {["devtools.echo", "devtools.version", "ops.status", "ops.health",
+                      "security.sentinel.status", "economy.phoenix.status",
                       "quantum.health", "quantum.backends", "governance.protocols.list",
                       "bookpi.stats", "economy.fees.model", "kernel.health",
+                      "kernel.isabella.test", "ops.nodes.list",
                     ].map(op => (
                       <Badge
                         key={op}
@@ -366,7 +368,7 @@ type TAMVEventType =
                 <BookOpen className="w-5 h-5 text-primary" />
                 <div>
                   <h4 className="font-medium">Documentación</h4>
-                  <p className="text-xs text-muted-foreground">8 volúmenes canónicos</p>
+                  <p className="text-xs text-muted-foreground">9 volúmenes canónicos</p>
                 </div>
               </div>
             </Card>

@@ -1,73 +1,52 @@
-# Welcome to your Lovable project
+# TAMV Online / Civilizational Core
 
-## Project info
+Plataforma civilizatoria digital orientada a identidad soberana, gobernanza operativa y despliegue territorial (RDM Digital) sobre el núcleo TAMV OS.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Estado del proyecto
 
-## How can I edit this code?
+- **Fase actual:** MVP avanzado / beta privada dura.
+- **Meta inmediata:** stage semi-real con usuarios controlados y guardianes internos.
+- **Meta de salida:** producción pública con hardening técnico, legal y operativo.
 
-There are several ways of editing your application.
+## Módulos principales
 
-**Use Lovable**
+- **Atlas**: monitor federado de nodos, seguridad y economía Fénix.
+- **Guardian Console**: circuito HITL para revisión y resolución de acciones críticas.
+- **RDM Digital**: capa territorial (mapa vivo, contenidos, experiencias y Realito AI).
+- **DevHub / DM-X7**: gateway unificado para integración de servicios y módulos.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Novedad operativa incluida
 
-Changes made via Lovable will be committed automatically to this repo.
+Se integró un **Centro de Preparación Operativa** en la UI para alinear equipos técnicos y de gobierno con una ejecución real hacia stage/producción:
 
-**Use your preferred IDE**
+- Checklist tipado por dominios (infra/seguridad, producto, XR/RDM, operación/gobernanza).
+- Progreso global y por hito (`stage` y `production`).
+- Visualización compartida en Atlas y Guardian para seguimiento continuo.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Documentación canónica
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Revisa `docs/README.md` para el índice completo de volúmenes (I-IX) y análisis operativo complementario.
 
-Follow these steps:
+## Desarrollo local
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Comandos útiles
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+npm run build
+npm run preview
+npm run lint
+```
 
-**Use GitHub Codespaces**
+> Nota: si `npm run lint` falla por dependencias de ESLint, instala primero las dependencias del proyecto.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Stack
 
-## What technologies are used for this project?
-
-This project is built with:
-
+- React + TypeScript
 - Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- Tailwind + shadcn/ui
+- Supabase (auth, datos y funciones)

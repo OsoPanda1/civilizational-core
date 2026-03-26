@@ -24,6 +24,8 @@
 | [Volumen VI - Seguridad](./VOLUMEN_VI_SEGURIDAD.md) | MSR, Zero-Trust y protocolos |
 | [Volumen VII - Legal](./VOLUMEN_VII_LEGAL.md) | Marco jurídico comparado |
 | [Volumen VIII - Roadmap](./VOLUMEN_VIII_ROADMAP.md) | Fases de implementación |
+| [Volumen IX - Preproducción](./VOLUMEN_IX_PREPRODUCCION.md) | Hardening, operación y checklist de salida a producción |
+| [Análisis OsoPanda1 - Visión Operativa](./ANALISIS_OSOPANDA1_VISION_OPERATIVA.md) | Lectura estratégica de visión y traducción a ejecución operativa |
 
 ---
 

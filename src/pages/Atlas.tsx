@@ -11,6 +11,7 @@ import { useFederatedNodes } from "@/hooks/useFederatedNodes";
 import { usePhoenixStatus } from "@/hooks/usePhoenixStatus";
 import { useState, useEffect } from "react";
 import { callGateway } from "@/lib/tamv-gateway-client";
+import { OperationalReadinessBoard } from "@/components/operations/OperationalReadinessBoard";
 
 export default function Atlas() {
   const { nodes, loading: nodesLoading } = useFederatedNodes();
@@ -152,6 +153,10 @@ export default function Atlas() {
             <TabsTrigger value="economy" className="gap-2">
               <Zap className="w-4 h-4" />
               Economía Fénix
+            </TabsTrigger>
+            <TabsTrigger value="operations" className="gap-2">
+              <CheckCircle className="w-4 h-4" />
+              Preparación
             </TabsTrigger>
           </TabsList>
 
@@ -351,6 +356,10 @@ export default function Atlas() {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          <TabsContent value="operations">
+            <OperationalReadinessBoard />
           </TabsContent>
         </Tabs>
       </div>

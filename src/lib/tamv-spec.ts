@@ -261,6 +261,12 @@ export const tamvSpec: TamvSpec = {
     description: 'Reglas activas de firewall lógico.',
     category: 'admin',
   }),
+  'security.sentinel.status': op({
+    id: 'security.sentinel.status', domain: 'security', method: 'GET',
+    path: '/v7/sentinel/status', authRequired: true,
+    description: 'Estado general de Sentinel (modo, amenazas recientes, nivel de alerta).',
+    category: 'user',
+  }),
 
   // ═══════════════════ ECONOMY (22) ═══════════════════
   'economy.balance': op({
@@ -311,6 +317,12 @@ export const tamvSpec: TamvSpec = {
     roles: ['guardian', 'admin'],
     description: 'Auditoría de distribución económica 20/30/50.',
     category: 'admin',
+  }),
+  'economy.phoenix.status': op({
+    id: 'economy.phoenix.status', domain: 'economy', method: 'GET',
+    path: '/v7/economy/phoenix/status', authRequired: true,
+    description: 'Estado consolidado del Protocolo Fénix (fondo, salud, volumen, transacciones).',
+    category: 'user',
   }),
   'economy.fenix.ignite': op({
     id: 'economy.fenix.ignite', domain: 'economy', method: 'POST',
@@ -922,6 +934,13 @@ export const tamvSpec: TamvSpec = {
     description: 'Políticas actuales del kernel.',
     category: 'user',
   }),
+  'kernel.isabella.test': op({
+    id: 'kernel.isabella.test', domain: 'kernel', method: 'POST',
+    path: '/v7/kernel/isabella/test', authRequired: true,
+    roles: ['guardian', 'admin'],
+    description: 'Ejecuta un test diagnóstico del pipeline Isabella (moderación, confianza, explicación).',
+    category: 'admin',
+  }),
   'kernel.health': op({
     id: 'kernel.health', domain: 'kernel', method: 'GET',
     path: '/v7/kernel/health', authRequired: true,
@@ -1000,6 +1019,12 @@ export const tamvSpec: TamvSpec = {
     id: 'ops.mode', domain: 'ops', method: 'GET',
     path: '/v7/ops/mode', authRequired: true,
     description: 'Modo operativo actual.',
+    category: 'user',
+  }),
+  'ops.nodes.list': op({
+    id: 'ops.nodes.list', domain: 'ops', method: 'GET',
+    path: '/v7/ops/nodes', authRequired: true,
+    description: 'Lista de nodos federados con estado, salud y latencia.',
     category: 'user',
   }),
 
